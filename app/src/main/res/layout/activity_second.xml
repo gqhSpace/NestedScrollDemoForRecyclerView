@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/mRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ljc.example.com.nestedscrollview.scenetwo.view.SecondParentView
+            android:id="@+id/mSecondParentView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#00BFFF"
+                android:gravity="center"
+                android:text="此处为标题"
+                android:textColor="@color/cardview_light_background" />
+
+            <ljc.example.com.nestedscrollview.scenetwo.view.SecondOuterRecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F1f1f1"
+                android:overScrollMode="never" />
+        </ljc.example.com.nestedscrollview.scenetwo.view.SecondParentView>
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+</RelativeLayout>
