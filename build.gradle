@@ -5,7 +5,16 @@ buildscript {
         kotlin_version = '1.4.31'
     }
     repositories {
-        google()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven{ url 'http://maven.oschina.net/content/groups/public/'}
+        mavenCentral()
+        maven {
+            url 'https://maven.aliyun.com/repository/google/'
+        }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
         jcenter()
     }
     dependencies {
@@ -19,7 +28,16 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven{ url 'http://maven.oschina.net/content/groups/public/'}
+        maven {
+            url 'https://maven.aliyun.com/repository/google/'
+        }
+        mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
         jcenter()
     }
 }
