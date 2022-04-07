@@ -3,6 +3,7 @@ package ljc.example.com.nestedscrollview.sceneone.item;
 import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.ViewParent;
 import android.widget.RelativeLayout;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 import androidx.viewpager.widget.ViewPager;
 import ljc.example.com.nestedscrollview.R;
 import ljc.example.com.nestedscrollview.sceneone.adapter.MyViewPagerAdapter;
+import ljc.example.com.nestedscrollview.sceneone.view.ParentRecyclerView;
 import ljc.example.com.nestedscrollview.utils.AndroidUtil;
 import ljc.example.com.nestedscrollview.sceneone.view.ChildRecyclerView;
 
@@ -40,7 +42,7 @@ public class LastRecyclerViewItem extends RelativeLayout {
 
             @Override
             public void onPageSelected(int position) {
-                Log.i("----",position+"  onPageSelected");
+                Log.i("----", position + "  onPageSelected");
                 if (myViewPagerAdapter != null) {
                     List<PagerItemView> items = myViewPagerAdapter.getItems();
                     mChildRecyclerView = items.get(position).getChildRecyclerView();
@@ -83,5 +85,18 @@ public class LastRecyclerViewItem extends RelativeLayout {
         }
 
         return super.onInterceptTouchEvent(e);
+    }
+
+    ParentRecyclerView parentRecyclerView;
+
+    private void getParentRecyclerView() {
+        ViewParent parent = this;
+        while (parent != null && !(parent instanceof ParentRecyclerView)) {
+            parent = parent.getParent();
+        }
+        if (parent != null) {
+            parentRecyclerView = (ParentRecyclerView) parent;
+        }
+
     }
 }

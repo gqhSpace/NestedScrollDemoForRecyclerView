@@ -80,7 +80,9 @@ public class SecondParentView extends LinearLayout implements NestedScrollingPar
 
         if (target instanceof SecondInnerRecyclerView) {
             SecondInnerRecyclerView innerRecyclerView = (SecondInnerRecyclerView) target;
-            if (dy < 0 && !innerRecyclerView.canScrollVertically(-1)) {
+            boolean outerNeedScrollForUpScroll = dy > 0 && outerRecyclerView.canScrollVertically(1);//上滑&&父列表未滑动到底
+            boolean outerNeedScrollForDownScroll = dy < 0 && !innerRecyclerView.canScrollVertically(-1);//下滑&&子列表滑动到顶
+            if (outerNeedScrollForUpScroll || outerNeedScrollForDownScroll) {
                 outerRecyclerView.scrollBy(0, dy);
                 consumed[1] = dy;
             }

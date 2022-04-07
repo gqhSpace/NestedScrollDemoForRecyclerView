@@ -57,7 +57,7 @@ public class ParentRecyclerView extends RecyclerView implements NestedScrollingP
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Log.i("-----", "scrollBy Y = " + dy + "  state =" + status);
+//                Log.i("-----", "scrollBy Y = " + dy + "  state =" + status);
             }
         });
     }
@@ -124,18 +124,18 @@ public class ParentRecyclerView extends RecyclerView implements NestedScrollingP
             mFlingVelocityY = velocityY;
 
         }
-        Log.i("-----111", "fling Y = " + velocityY + "  !fling =" + !fling);
+//        Log.i("-----111", "fling Y = " + velocityY + "  !fling =" + !fling);
         return fling;
     }
 
     private void dispatchParentFling() {
         if (isScrollEnd() && mFlingVelocityY != 0) {
-            Log.i("-----111", "fling Y = " + "dispatchParentFling");
+//            Log.i("-----111", "fling Y = " + "dispatchParentFling");
             ChildRecyclerView childRecyclerView = findChildRecyclerView();
             if (childRecyclerView != null) {
                 double splineFlingDistance = flingHelper.getSplineFlingDistance(mFlingVelocityY);
                 childRecyclerView.fling(0, flingHelper.getVelocityByDistance(splineFlingDistance));
-                Log.i("-----111", "mFlingVelocityY = " + mFlingVelocityY);
+//                Log.i("-----111", "mFlingVelocityY = " + mFlingVelocityY);
             }
         }
         mFlingVelocityY = 0;
@@ -151,7 +151,7 @@ public class ParentRecyclerView extends RecyclerView implements NestedScrollingP
             ChildRecyclerView childRecyclerView = findChildRecyclerView();
             if(childRecyclerView!=null){
 //                childRecyclerView.stopScroll();
-                Log.i("-----", "moveY = "+ (lastY-e.getY() ));
+//                Log.i("-----", "moveY = "+ (lastY-e.getY() ));
                 childRecyclerView.scrollBy(0,(int) (lastY-e.getY()));
             }
         }
@@ -181,7 +181,7 @@ public class ParentRecyclerView extends RecyclerView implements NestedScrollingP
 
     @Override
     public void onStopNestedScroll(@NonNull View target, int type) {
-
+//        Log.i("-----", Log.getStackTraceString(new Throwable()) );
     }
 
     @Override
@@ -192,8 +192,10 @@ public class ParentRecyclerView extends RecyclerView implements NestedScrollingP
     @Override
     public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
         ChildRecyclerView childRecyclerView = findChildRecyclerView();
-        if (dy < 0 && childRecyclerView != null && !childRecyclerView.canScrollVertically(-1)) {
-
+        boolean  parentCanScrollOnSlideDown =  dy < 0 && childRecyclerView != null && !childRecyclerView.canScrollVertically(-1);
+        boolean parentCanScrollOnSlideUp = dy > 0 && !isScrollEnd();
+        if (parentCanScrollOnSlideDown || parentCanScrollOnSlideUp) { //下滑&&子列表滑动到顶 || 上滑&&父列表未滑动到底
+            Log.i("-----", "onNestedPreScroll Y = " + dy );
             scrollBy(0, dy);
             consumed[1] = dy;
         }

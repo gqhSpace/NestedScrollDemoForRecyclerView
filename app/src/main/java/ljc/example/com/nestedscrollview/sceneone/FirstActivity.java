@@ -30,7 +30,7 @@ public class FirstActivity extends AppCompatActivity {
 //        recyclerView.setLayoutManager(linearLayoutManager);
         //添加Android自带的分割线
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        final ParentRecyclerViewAdapter adapter = new ParentRecyclerViewAdapter(this, 20);
+        final ParentRecyclerViewAdapter adapter = new ParentRecyclerViewAdapter(this, 50);
         recyclerView.setAdapter(adapter);
     }
 
