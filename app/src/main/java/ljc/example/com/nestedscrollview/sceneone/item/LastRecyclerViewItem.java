@@ -75,28 +75,7 @@ public class LastRecyclerViewItem extends RelativeLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) { //内层recyclerview可以滑动的处理，不放在内层recyclerview处理是因为那样会拦截横滑
-        boolean isChildScrollTop = mChildRecyclerView == null || !mChildRecyclerView.canScrollVertically(-1);//子滑动到顶
-        if(isChildScrollTop){
-            Log.i("-----", "允许父拦截");
-            getParent().requestDisallowInterceptTouchEvent(false);//允许父拦截
-        }else{
-            Log.i("-----", "不允许父拦截");
-            getParent().requestDisallowInterceptTouchEvent(true);//不允许父拦截
-        }
-
+        getParent().requestDisallowInterceptTouchEvent(true);//不允许父拦截
         return super.onInterceptTouchEvent(e);
-    }
-
-    ParentRecyclerView parentRecyclerView;
-
-    private void getParentRecyclerView() {
-        ViewParent parent = this;
-        while (parent != null && !(parent instanceof ParentRecyclerView)) {
-            parent = parent.getParent();
-        }
-        if (parent != null) {
-            parentRecyclerView = (ParentRecyclerView) parent;
-        }
-
     }
 }
