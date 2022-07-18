@@ -38,6 +38,7 @@ public class SecondOuterRecyclerView extends RecyclerView {
                 super.onScrolled(recyclerView, dx, dy);
                 boolean isScrollTop = !canScrollVertically(-1);
                 if(isScrollTop){ //解决嵌套刷新视图惯性滑动到顶后无法立刻刷新的问题
+                    //停止多余的fling,也可以在onNestedPreScroll，判断到顶后执行 ViewCompat.stopNestedScroll(target, type);
                     stopNestedScroll();
                     setNestedScrollingEnabled(false);
                 }else{
